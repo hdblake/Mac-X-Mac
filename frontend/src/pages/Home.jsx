@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <main>
-      <h1 className="font-header text-main text-9xl text-center mt-8">
+      <h1 className="font-header text-main text-8xl text-center mt-8">
         Welcome
       </h1>
       <p className="text-center font-mainText text-main text-lg w-3/5 m-auto mt-5">
