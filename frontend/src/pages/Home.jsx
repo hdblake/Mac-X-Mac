@@ -1,6 +1,8 @@
+import ImageCarousel from "../components/Carousel";
+
 export default function Home() {
   return (
-    <main>
+    <div>
       <h1 className="font-header text-main text-8xl text-center mt-8">
         Welcome
       </h1>
@@ -11,6 +13,7 @@ export default function Home() {
         to reach out with any questions or inquiries utilzing the provided
         contact form!
       </p>
-    </main>
+      <ImageCarousel />
+    </div>
   );
 }
