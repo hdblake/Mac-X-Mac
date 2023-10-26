@@ -19,7 +19,7 @@ export default function Header() {
       </div>
       <div className="bg-main">
         <nav>
-          <ul className="absolute left-0 top-1/2">
+          <ul className="fixed left-0 top-1/2">
             <li className="my-2 ml-4 text-main font-mainText font-bold text-2xl hover:underline hover:decoration-4 hover:decoration-accent hover:underline-offset-4">
               Products
             </li>
