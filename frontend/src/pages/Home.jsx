@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import ImageCarousel from "../components/Carousel";
 
 export default function Home() {
+  useEffect(() => {
+    document.title = "Mac X Mac | Home";
+  });
+
   return (
     <div>
       <h1 className="font-header text-main text-8xl text-center mt-8">
