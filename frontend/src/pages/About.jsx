@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function About() {
   useEffect(() => {
@@ -17,7 +18,11 @@ export default function About() {
         thus Mac X Mac (pronounced Mac by Mac) was born. I mainly create
         keychains and ornaments, but I also create earings and wall hangs. If
         you are looking for something else, do not be afraid to reach out and
-        ask utilizing the contact form here!
+        ask utilizing the contact form
+        <Link to="/Contact" className="text-accent">
+          {" "}
+          here!
+        </Link>
       </p>
       <p className="text-center font-mainText text-main text-lg w-3/5 m-auto mt-5">
         Not only did I choose macrame as my create outlet because of my
