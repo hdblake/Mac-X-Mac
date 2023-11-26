@@ -1,10 +1,17 @@
 import { useEffect } from "react";
-import ImageCarousel from "../components/Carousel";
+import Carousel from "../components/Carousel";
+import wallHang from "../images/wall-hang-2.webp";
+import navyWedding from "../images/navy-wedding-sign.webp";
+import threeKeychains from "../images/three-keychains.webp";
+import whiteWedding from "../images/white-wedding-sign.webp";
+import ImageCarousel from "../components/ImageCarousel";
 
 export default function Home() {
   useEffect(() => {
     document.title = "Mac X Mac | Home";
   });
+
+  const images = [wallHang, navyWedding, threeKeychains, whiteWedding];
 
   return (
     <div>
@@ -18,7 +25,7 @@ export default function Home() {
         to reach out with any questions or inquiries utilzing the provided
         contact form!
       </p>
-      <ImageCarousel />
+      <ImageCarousel images={images} />
     </div>
   );
 }
