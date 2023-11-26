@@ -26,7 +26,7 @@ export default function ContactForm() {
   return (
     <form
       name="contact"
-      className="my-6 bg-main px-8 py-6 rounded-xl shadow-lg w-1/2 m-auto"
+      className="my-6 bg-main px-8 py-6 rounded-xl shadow-lg w-3/4 md:w-2/5 m-auto"
       // eslint-disable-next-line react/no-unknown-property
       netlify
       onSubmit={handleSubmit}
