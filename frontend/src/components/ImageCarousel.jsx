@@ -1,20 +1,6 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// import { HiArrowSmRight } from "react-icons/hi";
-// import { HiArrowSmRLeft } from "react-icons/hi";
-
-function NextArrow(props) {
-  const { className, style, onClick } = props;
-
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", color: "#c5d6be" }}
-      onClick={onClick}
-    />
-  );
-}
 
 export default function ImageCarousel({ images }) {
   const settings = {
@@ -25,8 +11,6 @@ export default function ImageCarousel({ images }) {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
-    nextArrow: <NextArrow />,
-    // prevArrow: <HiArrowSmRLeft />,
   };
 
   return (
