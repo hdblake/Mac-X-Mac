@@ -10,6 +10,45 @@ body {
   margin: 0 auto;
 }
 
+.hamburger {
+  display: none; /* Hide by default on larger screens */
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.line {
+  width: 35px;
+  height: 5px;
+  background-color: #c5d6be;
+  margin: 3px;
+}
+
+@media screen and (max-width: 410px) {
+  .menu.open {
+    margin-left: 28px;
+  }
+}
+
+@media screen and (max-width: 719px) {
+  .menu {
+    display: none;
+  }
+
+  .menu.open {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 75px;
+  }
+
+  .hamburger {
+    display: flex;
+    position: absolute;
+    left: 5px;
+    top: 27.2%;
+    z-index: 2;
+  }
+}
+
 .slick-prev:before,
 .slick-next:before {
   color: #c5d6be;
