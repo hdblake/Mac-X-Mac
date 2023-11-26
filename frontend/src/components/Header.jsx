@@ -36,6 +36,11 @@ export default function Header() {
                 Contact
               </li>
             </Link>
+            <Link to="/Cart">
+              <li className="my-2 ml-4 text-main font-mainText font-bold text-2xl hover:underline hover:decoration-4 hover:decoration-accent hover:underline-offset-4">
+                Cart
+              </li>
+            </Link>
           </ul>
         </nav>
       </div>
