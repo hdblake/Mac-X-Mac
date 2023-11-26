@@ -9,3 +9,25 @@
 body {
   margin: 0 auto;
 }
+
+.slick-prev:before,
+.slick-next:before {
+  color: #c5d6be;
+  font-size: 35px;
+}
+
+.slick-slider {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.slick-dots li button:before {
+  color: #c292a1 !important;
+}
+
+@media screen and (max-width: 550px) {
+  .slick-prev:before,
+  .slick-next:before {
+    display: none;
+  }
+}
