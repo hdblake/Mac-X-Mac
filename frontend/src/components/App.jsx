@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Router, Routes, Route } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "../pages/Home";
@@ -7,6 +7,9 @@ import Contact from "../pages/Contact";
 import Products from "../pages/Products";
 import Macrame from "../pages/Macrame";
 import Signs from "../pages/Signs";
+import Cart from "../pages/Cart";
+import Register from "../pages/Register";
+import Login from "../pages/Login";
 
 export default function App() {
   return (
@@ -20,6 +23,9 @@ export default function App() {
           <Route path="/Products" element={<Products />}></Route>
           <Route path="/Products/Macrame" element={<Macrame />}></Route>
           <Route path="/Products/Signs" element={<Signs />}></Route>
+          <Route path="/Cart" element={<Cart />}></Route>
+          <Route path="/Register" element={<Register />}></Route>
+          <Route path="/Login" element={<Login />}></Route>
         </Routes>
       </main>
       <Footer />
