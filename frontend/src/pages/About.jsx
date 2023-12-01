@@ -18,10 +18,10 @@ export default function About() {
         thus Mac X Mac (pronounced Mac by Mac) was born. I mainly create
         keychains and ornaments, but I also create earings and wall hangs. If
         you are looking for something else, do not be afraid to reach out and
-        ask utilizing the contact form
+        ask utilizing the
         <Link to="/Contact" className="text-accent">
           {" "}
-          here!
+          contact form!
         </Link>
       </p>
       <p className="text-center font-mainText text-main text-lg w-3/5 m-auto mt-5">
