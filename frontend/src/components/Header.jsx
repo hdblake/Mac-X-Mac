@@ -12,11 +12,11 @@ export default function Header() {
       </div>
       <div className="bg-main p-2 text-center">
         <span className="font-mainText font-bold text-secondary text-xl">
-          Login
+          <Link to="/Login">Login</Link>
         </span>
         <span className="font-mainText font-bold text-accent text-xl"> | </span>
         <span className="font-mainText font-bold text-secondary text-xl">
-          Signup
+          <Link to="/Register">Register</Link>
         </span>
       </div>
       <div>
