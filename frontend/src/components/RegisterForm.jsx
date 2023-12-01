@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 
 export default function RegisterForm() {
   const [firstName, setFirstName] = useState("");
@@ -10,14 +9,6 @@ export default function RegisterForm() {
   const handleRegistration = async (e) => {
     e.preventDefault();
     try {
-      // const response = await axios.post("http://localhost:3080/user/register", {
-      //   firstName,
-      //   lastName,
-      //   email,
-      //   password,
-      // });
-      // console.log("Registration successful:", response.data);
-      // alert("Successful registration");
       const response = await fetch("http://localhost:3080/user/register", {
         method: "POST",
         headers: {
