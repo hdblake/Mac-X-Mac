@@ -1,17 +1,33 @@
 const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3080;
+const mongoDb = require("./db/connect");
+// const bodyParser = require("body-parser");
+const cors = require("cors");
 
-// Middleware for parsing req body
-app.use(express.json());
+app
+	.use(express.json())
+	.use((req, res, next) => {
+		res.setHeader("Access-Control-Allow-Origin", "*");
+		res.setHeader(
+			"Access-Control-Allow-Headers",
+			"Origin, X-Requested-With, Content-Type, Accept, Z-Key"
+		);
+		res.setHeader("Content-Type", "application/json");
+		res.setHeader(
+			"Access-Control-Allow-Methods",
+			"GET, PUT, POST, DELETE, OPTIONS"
+		);
+		next();
+	})
+	.use("/", require("./routes"));
 
-// Middleware for handling cors policy
-app.use(cors());
-
-app.use("/", require("./routes"));
-
-app.listen(port, () => {
-	console.log(`Server listening on port: ${port}`);
+mongoDb.initDb((err, mongoDb) => {
+	if (err) {
+		console.log(err);
+	} else {
+		app.listen(port, () => {
+			console.log(`Connected to Db. Listening on port: ${port}`);
+		});
+	}
 });
