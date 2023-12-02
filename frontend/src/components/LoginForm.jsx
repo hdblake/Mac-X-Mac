@@ -1,27 +1,10 @@
-import { useState } from "react";
-
-export default function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:3080/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      console.log("Login successful:", response);
-      alert("Successful login");
-    } catch (error) {
-      console.error("Login failed:", error);
-      alert("Login failed");
-    }
-  };
-
+export default function LoginForm({
+  handleLogin,
+  email,
+  setEmail,
+  password,
+  setPassword,
+}) {
   return (
     <form
       className="my-6 bg-main px-8 py-6 rounded-xl shadow-lg w-3/4 md:w-2/5 m-auto flex flex-col gap-y-6"
