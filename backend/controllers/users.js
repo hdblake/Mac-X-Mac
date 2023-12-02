@@ -1,10 +1,16 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const registerUser = async (req, res) => {
 	try {
 		const {firstName, lastName, email, password} = req.body;
+		const existingEmail = await User.findOne({email});
+		if (existingEmail) {
+			return res.status(400).json({msg: "Email already in use"});
+		}
 		const hashedPassword = await bcrypt.hash(password, 10);
 		const user = new User({
 			firstName,
@@ -34,11 +40,29 @@ const loginUser = async (req, res) => {
 			return res.status(401).send({error: "Invalid password"});
 		}
 
-		const token = jwt.sign({userId: user._id}, "your_secret_key");
-		res.send({token});
+		const token = jwt.sign({user: user._id}, process.env.JWT_SECRET);
+		res.json({token, firstName: user.firstName});
 	} catch (err) {
 		res.status(500).send({error: "Something went wrong"});
 	}
 };
 
-module.exports = {registerUser, loginUser};
+const verifyToken = (req, res, next) => {
+	const token = req.headers.authorization;
+
+	if (!token) {
+		return res.status(403).json({message: "Token not provided"});
+	}
+
+	jwt.verify(token, process.env.JWT_SECRET, (err, decoded, name) => {
+		if (err) {
+			return res.status(401).json({message: "Failed to authenticate token"});
+		}
+
+		req.decoded = decoded;
+		name = User.firstName;
+		next();
+	});
+};
+
+module.exports = {registerUser, loginUser, verifyToken};
