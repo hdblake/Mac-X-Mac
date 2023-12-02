@@ -5,22 +5,23 @@ const mongoDb = require("./db/connect");
 // const bodyParser = require("body-parser");
 const cors = require("cors");
 
-app
-	.use(express.json())
-	.use((req, res, next) => {
-		res.setHeader("Access-Control-Allow-Origin", "*");
-		res.setHeader(
-			"Access-Control-Allow-Headers",
-			"Origin, X-Requested-With, Content-Type, Accept, Z-Key"
-		);
-		res.setHeader("Content-Type", "application/json");
-		res.setHeader(
-			"Access-Control-Allow-Methods",
-			"GET, PUT, POST, DELETE, OPTIONS"
-		);
-		next();
-	})
-	.use("/", require("./routes"));
+app.use(express.json());
+app.use(cors());
+app.use("/", require("./routes"));
+
+// .use((req, res, next) => {
+// 	res.setHeader("Access-Control-Allow-Origin", "*");
+// 	res.setHeader(
+// 		"Access-Control-Allow-Headers",
+// 		"Origin, X-Requested-With, Content-Type, Accept, Z-Key"
+// 	);
+// 	res.setHeader("Content-Type", "application/json");
+// 	res.setHeader(
+// 		"Access-Control-Allow-Methods",
+// 		"GET, PUT, POST, DELETE, OPTIONS"
+// 	);
+// 	next();
+// })
 
 mongoDb.initDb((err, mongoDb) => {
 	if (err) {
