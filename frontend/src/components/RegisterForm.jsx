@@ -1,26 +1,29 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function RegisterForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleRegistration = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3080/user/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ firstName, lastName, email, password }),
+      const response = await axios.post("http://localhost:3080/user/register", {
+        firstName,
+        lastName,
+        email,
+        password,
       });
-      console.log("Registration successful:", response.data);
-      alert("Successful registration");
+      if (response.status === 201) {
+        navigate("/Login");
+        alert("Successful registration");
+      }
     } catch (error) {
-      console.error("Registration failed:", error);
-      alert("Registration failed");
+      alert("Registration failed: " + error.response.data.msg);
     }
   };
 
