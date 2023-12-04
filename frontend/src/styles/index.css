@@ -19,7 +19,7 @@ body {
 .line {
   width: 35px;
   height: 5px;
-  background-color: #c5d6be;
+  background-color: #c292a1;
   margin: 3px;
 }
 
@@ -37,14 +37,15 @@ body {
   .menu.open {
     display: flex;
     justify-content: center;
-    margin-bottom: 75px;
+    margin-bottom: 60px;
+    margin-top: 0px;
   }
 
   .hamburger {
     display: flex;
     position: absolute;
     left: 5px;
-    top: 27.2%;
+    top: 5px;
     z-index: 2;
   }
 }
