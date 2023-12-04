@@ -1,10 +1,22 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import { macrame } from "../data/macrame";
 
-export default function Macrame() {
-  useEffect(() => {
-    document.title = "Mac X Mac | Macrame";
-  });
+export default function Macrame({ addToCart }) {
+  const [selectedColor, setSelectedColor] = useState("");
+  const [quantity, setQuantity] = useState(1);
+
+  const handleColorChange = (event) => {
+    setSelectedColor(event.target.value);
+  };
+
+  const handleQuantityChange = (event) => {
+    const value = parseInt(event.target.value);
+    setQuantity(value);
+  };
+
+  const handleAddToCart = (productId, name, price, color, quantity) => {
+    addToCart({ ...productId, name, price, color, quantity });
+  };
 
   return (
     <section>
@@ -45,12 +57,10 @@ export default function Macrame() {
                     name="colors"
                     id="color-select"
                     className="bg-secondary border border-main border-2 rounded-lg p-1 text-accent font-mainText"
-                    defaultValue={"DEFAULT"}
-                    // onChange={handleColor}
+                    value={selectedColor}
+                    onChange={handleColorChange}
                   >
-                    <option value="DEFAULT" disabled hidden>
-                      --select color--
-                    </option>
+                    <option value="">--select color--</option>
                     {product.colors.map((color) => (
                       <option
                         className="text-main font-accentText border border-main border-2"
@@ -62,22 +72,26 @@ export default function Macrame() {
                     ))}
                   </select>
                 </div>
-                {/* <label
-                  htmlFor="quantity"
-                  className="font-mainText text-accent text-lg mr-2"
-                >
-                  Quantity:
-                </label>
+                <label htmlFor="quantity">Quantity:</label>
                 <input
                   type="number"
                   id="quantity"
                   min="1"
+                  step="1"
                   value={quantity}
-                  onChange={quantityChange}
-                /> */}
+                  onChange={handleQuantityChange}
+                />
                 <button
                   className="font-mainText text-secondary bg-main py-2 rounded-lg"
-                  // onClick={() => addToCart(product, selectValue)}
+                  onClick={() =>
+                    handleAddToCart(
+                      product.id,
+                      product.name,
+                      product.price,
+                      selectedColor,
+                      quantity,
+                    )
+                  }
                 >
                   Add To Cart
                 </button>
