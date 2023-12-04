@@ -12,7 +12,6 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import { useState, useEffect } from "react";
 import Account from "../pages/Account";
-import { macrame } from "../data/macrame";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -55,7 +54,6 @@ export default function App() {
       );
       setCart(updatedCart);
     } else {
-      // setCart((prevCart) => [...prevCart, { ...product, quantity }]);
       setCart([...cart, { ...product, quantity }]);
     }
   };
