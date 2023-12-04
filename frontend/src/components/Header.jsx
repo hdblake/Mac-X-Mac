@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import mainLogo from "../images/macxmac.png";
 import Navigation from "./Navigation";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 export default function Header({ loggedIn, logout }) {
   const [firstName, setFirstName] = useState(null);
@@ -30,7 +29,7 @@ export default function Header({ loggedIn, logout }) {
           </p>
         ) : null}
       </div>
-      <div className="bg-main p-2 text-center">
+      <div className="bg-main p-2 text-center mb-2">
         <span className="font-mainText font-bold text-secondary text-xl">
           {loggedIn ? (
             <button onClick={logout}>Logout</button>
