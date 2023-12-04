@@ -12,6 +12,7 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import { useState, useEffect } from "react";
 import Account from "../pages/Account";
+import { macrame } from "../data/macrame";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -31,10 +32,37 @@ export default function App() {
     navigate("/");
   };
 
-  const [cart, setCart] = useState([]);
+  // Cart functionality
+  const [savedCart] = useState(localStorage.getItem("cart"));
+  const [cart, setCart] = useState(savedCart ? JSON.parse(savedCart) : []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (product) => {
-    setCart([...cart, product]);
+    const { id, color, quantity } = product;
+
+    const existingProductIndex = cart.findIndex(
+      (item) => item.id === id && item.color === color,
+    );
+
+    if (existingProductIndex !== -1) {
+      const updatedCart = cart.map((item, index) =>
+        index === existingProductIndex
+          ? { ...item, quantity: item.quantity + quantity }
+          : item,
+      );
+      setCart(updatedCart);
+    } else {
+      // setCart((prevCart) => [...prevCart, { ...product, quantity }]);
+      setCart([...cart, { ...product, quantity }]);
+    }
+  };
+
+  const removeFromCart = (index) => {
+    const updatedCart = cart.filter((_, i) => i !== index);
+    setCart(updatedCart);
   };
 
   return (
@@ -51,7 +79,10 @@ export default function App() {
             element={<Macrame addToCart={addToCart} />}
           ></Route>
           <Route path="/Products/Signs" element={<Signs />}></Route>
-          <Route path="/Cart" element={<Cart cart={cart} />}></Route>
+          <Route
+            path="/Cart"
+            element={<Cart cart={cart} removeFromCart={removeFromCart} />}
+          ></Route>
           <Route path="/Register" element={<Register />}></Route>
           <Route
             path="/Login"
