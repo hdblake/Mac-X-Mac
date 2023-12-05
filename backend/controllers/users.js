@@ -1,5 +1,4 @@
 const User = require("../models/userModel");
-const Order = require("../models/orderModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
@@ -11,7 +10,7 @@ const registerUser = async (req, res) => {
 		const {firstName, lastName, email, password} = req.body;
 		const existingEmail = await User.findOne({email});
 		if (existingEmail) {
-			return res.status(400).json({msg: "Email already in use"});
+			return res.status(400).json({message: "Email already in use"});
 		}
 		const hashedPassword = await bcrypt.hash(password, 10);
 		const user = new User({
@@ -22,8 +21,8 @@ const registerUser = async (req, res) => {
 		});
 		await user.save();
 		res.status(201).json({message: "User created successfully"});
-	} catch (err) {
-		res.status(500).json({error: "Something went wrong"});
+	} catch (error) {
+		res.status(500).json({error: "Couldn't register user at this time"});
 	}
 };
 
@@ -34,19 +33,21 @@ const loginUser = async (req, res) => {
 		const userId = new ObjectId(req.params.id);
 
 		if (!user) {
-			return res.status(404).send({error: "User not found"});
+			return res
+				.status(404)
+				.json({error: "Email not registered with an account"});
 		}
 
 		const validPassword = await bcrypt.compare(password, user.password);
 
 		if (!validPassword) {
-			return res.status(401).send({error: "Invalid password"});
+			return res.status(401).json({error: "Invalid password"});
 		}
 
 		const token = jwt.sign({user: user._id}, process.env.JWT_SECRET);
 		res.json({token, userId: userId, firstName: user.firstName});
-	} catch (err) {
-		res.status(500).send({error: "Something went wrong"});
+	} catch (error) {
+		res.status(500).send({error: "Couldn't login with account at this time"});
 	}
 };
 
@@ -54,27 +55,16 @@ const verifyToken = (req, res, next) => {
 	const token = req.headers.authorization;
 
 	if (!token) {
-		return res.status(403).json({message: "Token not provided"});
+		return res.status(401).json({message: "Authorization denied, no token"});
 	}
 
-	jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-		if (err) {
-			return res.status(401).json({message: "Failed to authenticate token"});
+	jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
+		if (error) {
+			return res.status(401).json({message: "Token is not valid"});
 		}
-
-		req.decoded = decoded;
+		req.user = user;
 		next();
 	});
 };
 
-const getOrders = async (req, res, next) => {
-	try {
-		const userId = new ObjectId(req.params.id);
-		const orders = await Order.find({_id: userId});
-		res.json(orders);
-	} catch (err) {
-		res.status(500).json({message: err.message});
-	}
-};
-
-module.exports = {registerUser, loginUser, verifyToken, getOrders};
+module.exports = {registerUser, loginUser, verifyToken};
