@@ -1,8 +1,10 @@
 const User = require("../models/userModel");
+const Order = require("../models/orderModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
+const ObjectId = require("mongodb").ObjectId;
 
 const registerUser = async (req, res) => {
 	try {
@@ -29,6 +31,7 @@ const loginUser = async (req, res) => {
 	try {
 		const {email, password} = req.body;
 		const user = await User.findOne({email});
+		const userId = new ObjectId(req.params.id);
 
 		if (!user) {
 			return res.status(404).send({error: "User not found"});
@@ -41,7 +44,7 @@ const loginUser = async (req, res) => {
 		}
 
 		const token = jwt.sign({user: user._id}, process.env.JWT_SECRET);
-		res.json({token, firstName: user.firstName});
+		res.json({token, userId: userId, firstName: user.firstName});
 	} catch (err) {
 		res.status(500).send({error: "Something went wrong"});
 	}
@@ -54,15 +57,24 @@ const verifyToken = (req, res, next) => {
 		return res.status(403).json({message: "Token not provided"});
 	}
 
-	jwt.verify(token, process.env.JWT_SECRET, (err, decoded, name) => {
+	jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
 		if (err) {
 			return res.status(401).json({message: "Failed to authenticate token"});
 		}
 
 		req.decoded = decoded;
-		name = User.firstName;
 		next();
 	});
 };
 
-module.exports = {registerUser, loginUser, verifyToken};
+const getOrders = async (req, res, next) => {
+	try {
+		const userId = new ObjectId(req.params.id);
+		const orders = await Order.find({_id: userId});
+		res.json(orders);
+	} catch (err) {
+		res.status(500).json({message: err.message});
+	}
+};
+
+module.exports = {registerUser, loginUser, verifyToken, getOrders};
