@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import LoginForm from "../components/LoginForm";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 export default function Login({ setLoggedIn }) {
   useEffect(() => {
     document.title = "Mac X Mac | Login";
   });
+
+  const location = useLocation();
+  const message = location.state?.message || "";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,15 +23,11 @@ export default function Login({ setLoggedIn }) {
         email,
         password,
       });
-      setLoggedIn(true);
-      const token = response.data.token;
-      const firstName = response.data.firstName;
-      const userId = response.data.userId;
+      const { token, firstName, userId } = response.data;
       localStorage.setItem("token", token);
       localStorage.setItem("firstName", firstName);
       localStorage.setItem("userId", userId);
-      console.log(response);
-      alert("Successful login");
+      setLoggedIn(true);
       navigate("/");
     } catch (error) {
       console.error("Login failed: " + error);
@@ -41,6 +40,9 @@ export default function Login({ setLoggedIn }) {
       <h1 className="font-header text-main text-7xl md:text-8xl text-center mt-10">
         Login:
       </h1>
+      {message && (
+        <p className="mt-4 text-mainText text-accent text-center">{message}</p>
+      )}
       <LoginForm
         handleLogin={handleLogin}
         email={email}
