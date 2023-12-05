@@ -1,38 +1,18 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-export default function Account({ setLoggedIn }) {
-  const navigate = useNavigate();
-
+export default function Account() {
   useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:3080/user/account", {
-          headers: { Authorization: token },
-        });
-        console.log(response.data);
-      } catch (err) {
-        console.log("Failed to get token: " + err.response.data.message);
-      }
-    };
-    fetchToken();
-  }, []);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setLoggedIn(true);
-    } else {
-      navigate("/Login");
-    }
-  }, []);
+    document.title = "Mac X Mac | Account";
+  });
 
   return (
     <section>
-      <h1>Account</h1>
-      <p>Welcome!</p>
+      <h1 className="font-header text-main text-7xl md:text-8xl md:px-2 text-center mt-10 underline decoration-2 decoration-accent">
+        Account
+      </h1>
+      <h2 className="font-mainText text-accent text-lg md:text-2xl text-center">
+        Welcome!
+      </h2>
     </section>
   );
 }
