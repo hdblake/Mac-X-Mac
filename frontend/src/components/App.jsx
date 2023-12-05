@@ -12,6 +12,7 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import { useState, useEffect } from "react";
 import Account from "../pages/Account";
+import Checkout from "../pages/Checkout";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -27,6 +28,7 @@ export default function App() {
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("firstName");
+    localStorage.removeItem("userId");
     setLoggedIn(false);
     navigate("/");
   };
@@ -89,6 +91,10 @@ export default function App() {
           <Route
             path="/Account"
             element={<Account setLoggedIn={setLoggedIn} />}
+          ></Route>
+          <Route
+            path="/Checkout"
+            element={<Checkout cart={cart} setCart={setCart} />}
           ></Route>
         </Routes>
       </main>
