@@ -9,5 +9,6 @@ router.get("/account", userController.verifyToken, (req, res) => {
 		user: req.decoded,
 	});
 });
+router.get("/history/:userId", userController.getOrders);
 
 module.exports = router;
