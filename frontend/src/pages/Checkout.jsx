@@ -35,8 +35,7 @@ export default function Checkout({ cart, setCart }) {
       console.log("Order placed:", response.data.order);
       localStorage.removeItem("cart");
       setCart([]);
-      alert("Order submitted!");
-      navigate("/");
+      navigate("/", { state: { message: "Order successfully placed!" } });
     } catch (err) {
       console.log("Error: " + err);
     }
@@ -48,26 +47,43 @@ export default function Checkout({ cart, setCart }) {
         Checkout
       </h1>
       <div>
-        <h2 className="font-mainText text-main text-2xl">Order Summary:</h2>
-        <p className="font-mainText text-main text-md md:text-lg text-center">
-          Cart Total: ${total}
-        </p>
-        <p className="font-mainText text-main text-md md:text-lg text-center">
-          Shipping: ${shipping}
-        </p>
-        <p className="font-mainText text-main text-md md:text-lg text-center">
-          Tax: ${tax}
-        </p>
-        <p className="font-mainText text-main text-md md:text-lg text-center">
-          Order Total: ${totalPrice}
-        </p>
+        {cart.length === 0 ? (
+          <>
+            <p className="font-mainText text-main text-md md:text-lg text-center">
+              Cart is empty, there is nothing to checkout.
+            </p>
+            <p className="font-mainText text-main text-md md:text-lg text-center">
+              Please add items to the cart in order to checkout!
+            </p>
+          </>
+        ) : (
+          <>
+            <div>
+              <h2 className="font-mainText text-main text-2xl">
+                Order Summary:
+              </h2>
+              <p className="font-mainText text-main text-md md:text-lg text-center">
+                Cart Total: ${total}
+              </p>
+              <p className="font-mainText text-main text-md md:text-lg text-center">
+                Shipping: ${shipping}
+              </p>
+              <p className="font-mainText text-main text-md md:text-lg text-center">
+                Tax: ${tax}
+              </p>
+              <p className="font-mainText text-main text-md md:text-lg text-center">
+                Order Total: ${totalPrice}
+              </p>
+            </div>
+            <button
+              className="font-mainText text-secondary bg-accent p-2 rounded-lg mt-4"
+              onClick={handleCheckout}
+            >
+              Checkout
+            </button>
+          </>
+        )}
       </div>
-      <button
-        className="font-mainText text-secondary bg-accent p-2 rounded-lg mt-4"
-        onClick={handleCheckout}
-      >
-        Checkout
-      </button>
     </section>
   );
 }
