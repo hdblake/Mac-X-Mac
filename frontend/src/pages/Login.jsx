@@ -10,7 +10,6 @@ export default function Login({ setLoggedIn }) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
 
   const navigate = useNavigate();
 
@@ -22,11 +21,12 @@ export default function Login({ setLoggedIn }) {
         password,
       });
       setLoggedIn(true);
-      setFirstName(response.data.firstName);
       const token = response.data.token;
       const firstName = response.data.firstName;
+      const userId = response.data.userId;
       localStorage.setItem("token", token);
       localStorage.setItem("firstName", firstName);
+      localStorage.setItem("userId", userId);
       console.log(response);
       alert("Successful login");
       navigate("/");
