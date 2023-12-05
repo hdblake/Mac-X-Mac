@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Account() {
   useEffect(() => {
@@ -13,6 +14,11 @@ export default function Account() {
       <h2 className="font-mainText text-accent text-lg md:text-2xl text-center">
         Welcome!
       </h2>
+      <div className="m-auto text-center">
+        <button>
+          <Link to="/Account/Orders">Order History</Link>
+        </button>
+      </div>
     </section>
   );
 }
