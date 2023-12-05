@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 import Account from "../pages/Account";
 import Checkout from "../pages/Checkout";
 import ProtectedRoute from "./ProtectedRoute";
+import Orders from "../pages/Orders";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -103,6 +104,7 @@ export default function App() {
               />
             }
           ></Route>
+          <Route path="/Account/Orders" element={<Orders />}></Route>
         </Routes>
       </main>
       <Footer />
