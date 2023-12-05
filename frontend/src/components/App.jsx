@@ -91,7 +91,7 @@ export default function App() {
           ></Route>
           <Route
             path="/Account"
-            element={<Account setLoggedIn={setLoggedIn} />}
+            element={<ProtectedRoute element={Account} />}
           ></Route>
           <Route
             path="/Checkout"
