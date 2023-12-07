@@ -46,22 +46,65 @@ export default function Orders() {
   }
 
   return (
-    <section>
-      <h2>Order History</h2>
+    <section className="flex flex-col items-center">
+      <h1 className="font-header text-main text-7xl md:text-8xl md:px-2 text-center mt-10">
+        Order History
+      </h1>
       <ul>
         {orders.map((order) => (
-          <li key={order._id}>
-            <p>Items:</p>
+          <li
+            key={order._id}
+            className="border border-2 border-accent rounded-xl shadow-lg p-6 my-6"
+          >
+            <p className="font-mainText text-accent text-xl text-center mb-4">
+              Item(s):
+            </p>
             {order.items.map((item, i) => (
               <div key={i}>
-                <p>{item.name}</p>
-                <p>{item.quantity}</p>
-                <p>{item.price}</p>
-                <p>{item.color}</p>
+                <p>
+                  <span className="font-mainText text-main text-lg">
+                    Product:
+                  </span>
+                  <span className="font-mainText text-main text-lg">
+                    {" "}
+                    {item.name}
+                  </span>
+                </p>
+                <p>
+                  <span className="font-mainText text-main text-lg">
+                    Quantity:
+                  </span>
+                  <span className="font-mainText text-main text-lg">
+                    {" "}
+                    {item.quantity}
+                  </span>
+                </p>
+                <p>
+                  <span className="font-mainText text-main text-lg">
+                    Price:
+                  </span>
+                  <span className="font-mainText text-main text-lg">
+                    {" "}
+                    ${item.price}
+                  </span>
+                </p>
+                <p>
+                  <span className="font-mainText text-main text-lg">
+                    Color:
+                  </span>
+                  <span className="font-mainText text-main text-lg">
+                    {" "}
+                    {item.color}
+                  </span>
+                </p>
               </div>
             ))}
-            <p>Total: {order.totalPrice}</p>
-            <p>Ordered on: {order.date}</p>
+            <p className="font-mainText text-main text-lg">
+              Total: ${order.totalPrice}
+            </p>
+            <p className="font-mainText text-main text-lg">
+              Ordered on: {order.date.substring(0, 10)}
+            </p>
           </li>
         ))}
       </ul>
