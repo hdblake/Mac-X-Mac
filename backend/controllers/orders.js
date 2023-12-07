@@ -21,8 +21,13 @@ const createOrder = async (req, res, next) => {
 
 const getOrders = async (req, res, next) => {
 	try {
-		const userId = new ObjectId(req.params.id);
-		const orders = await Order.find({_id: userId});
+		const userId = req.user.userId;
+		const orders = await Order.find({user: userId});
+
+		if (!orders || orders.length === 0) {
+			return res.status(404).json({message: "No orders found"});
+		}
+
 		res.json(orders);
 	} catch (error) {
 		res
