@@ -20,18 +20,18 @@ const createOrder = async (req, res, next) => {
 
 const getOrders = async (req, res, next) => {
 	try {
-		const userId = req.user.userId;
+		const userId = req.headers.userid;
 		const orders = await Order.find({user: userId});
 
 		if (!orders || orders.length === 0) {
-			return res.status(404).json({message: "No orders found"});
+			return res
+				.status(404)
+				.json({message: `No orders found ${req.headers.userid}`});
 		}
 
 		res.json(orders);
 	} catch (error) {
-		res
-			.status(500)
-			.json({message: "Could not fetch order history at this time"});
+		res.status(500).json({message: `Test user ${req.user.userId}`});
 	}
 };
 
