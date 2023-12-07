@@ -52,19 +52,18 @@ const loginUser = async (req, res) => {
 };
 
 const verifyToken = (req, res, next) => {
-	const token = req.headers.authorization;
-
+	const token = req.headers.authorization.split(" ")[1]; // Extract token from header
 	if (!token) {
-		return res.status(401).json({message: "Authorization denied, no token"});
+		return res.status(401).json({message: "Auth failed, no token"});
 	}
 
-	jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
-		if (error) {
-			return res.status(401).json({message: "Token is not valid"});
-		}
-		req.user = user;
+	try {
+		const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+		req.user = {userId: decodedToken.userId};
 		next();
-	});
+	} catch (error) {
+		res.status(401).json({message: "Auth failed"});
+	}
 };
 
 module.exports = {registerUser, loginUser, verifyToken};
