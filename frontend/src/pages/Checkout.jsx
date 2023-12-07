@@ -23,6 +23,7 @@ export default function Checkout({ cart, setCart }) {
   const handleCheckout = async () => {
     try {
       const userId = localStorage.getItem("userId");
+      const token = localStorage.getItem("token");
       const response = await axios.post(
         "http://localhost:3080/orders/checkout",
         {
@@ -30,6 +31,11 @@ export default function Checkout({ cart, setCart }) {
           items: cart,
           totalPrice,
           date: new Date(),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
       );
       console.log("Order placed:", response.data);
