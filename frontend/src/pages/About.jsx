@@ -8,7 +8,7 @@ export default function About() {
 
   return (
     <section>
-      <h1 className="font-header text-main text-7xl md:text-8xl md:px-2 text-center mt-10 underline decoration-2 decoration-accent">
+      <h1 className="font-header text-main text-7xl md:text-8xl md:px-2 text-center mt-10">
         About Mac X Mac
       </h1>
       <p className="text-center font-mainText text-main text-lg w-3/5 m-auto mt-6">

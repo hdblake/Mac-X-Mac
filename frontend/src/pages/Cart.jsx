@@ -14,7 +14,7 @@ export default function Cart({ cart, removeFromCart }) {
 
   return (
     <section>
-      <h1 className="font-header text-main text-7xl md:text-8xl text-center mt-10 underline decoration-2 decoration-accent">
+      <h1 className="font-header text-main text-7xl md:text-8xl text-center mt-10">
         Cart
       </h1>
       {cart.length === 0 ? (
