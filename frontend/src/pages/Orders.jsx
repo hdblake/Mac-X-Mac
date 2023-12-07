@@ -10,11 +10,13 @@ export default function Orders() {
     const fetchOrderHistory = async () => {
       try {
         const token = localStorage.getItem("token");
+        const userId = localStorage.getItem("userId");
         const response = await axios.get(
           "http://localhost:3080/orders/history",
           {
             headers: {
               Authorization: `Bearer ${token}`,
+              UserId: `${userId}`,
             },
           },
         );
