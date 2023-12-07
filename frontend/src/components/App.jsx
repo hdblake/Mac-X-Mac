@@ -13,7 +13,6 @@ import Login from "../pages/Login";
 import { useState, useEffect } from "react";
 import Account from "../pages/Account";
 import Checkout from "../pages/Checkout";
-import ProtectedRoute from "./ProtectedRoute";
 import Orders from "../pages/Orders";
 
 export default function App() {
@@ -90,19 +89,10 @@ export default function App() {
             path="/Login"
             element={<Login setLoggedIn={setLoggedIn} />}
           ></Route>
-          <Route
-            path="/Account"
-            element={<ProtectedRoute element={Account} />}
-          ></Route>
+          <Route path="/Account" element={<Account />}></Route>
           <Route
             path="/Checkout"
-            element={
-              <ProtectedRoute
-                element={Checkout}
-                cart={cart}
-                setCart={setCart}
-              />
-            }
+            element={<Checkout cart={cart} setCart={setCart} />}
           ></Route>
           <Route path="/Account/Orders" element={<Orders />}></Route>
         </Routes>
