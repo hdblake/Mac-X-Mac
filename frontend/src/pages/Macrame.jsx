@@ -72,7 +72,12 @@ export default function Macrame({ addToCart }) {
                     ))}
                   </select>
                 </div>
-                <label htmlFor="quantity">Quantity:</label>
+                <label
+                  className="font-mainText text-accent text-md md:text-lg -mb-2"
+                  htmlFor="quantity"
+                >
+                  Quantity:
+                </label>
                 <input
                   type="number"
                   id="quantity"
@@ -80,6 +85,7 @@ export default function Macrame({ addToCart }) {
                   step="1"
                   value={quantity}
                   onChange={handleQuantityChange}
+                  className="font-mainText text-accent text-md md:text-lg w-1/4"
                 />
                 <button
                   className="font-mainText text-secondary bg-main py-2 rounded-lg"
