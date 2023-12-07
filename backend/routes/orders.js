@@ -7,5 +7,6 @@ router.post(
 	userController.verifyToken,
 	orderController.createOrder
 );
+router.get("/history", userController.verifyToken, orderController.getOrders);
 
 module.exports = router;
