@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
-const ObjectId = require("mongodb").ObjectId;
 
 const registerUser = async (req, res) => {
 	try {
@@ -30,7 +29,7 @@ const loginUser = async (req, res) => {
 	try {
 		const {email, password} = req.body;
 		const user = await User.findOne({email});
-		const userId = new ObjectId(req.params.id);
+		const userId = user._id;
 
 		if (!user) {
 			return res
@@ -44,7 +43,7 @@ const loginUser = async (req, res) => {
 			return res.status(401).json({error: "Invalid password"});
 		}
 
-		const token = jwt.sign({user: user._id}, process.env.JWT_SECRET);
+		const token = jwt.sign({user: userId}, process.env.JWT_SECRET);
 		res.json({token, userId: userId, firstName: user.firstName});
 	} catch (error) {
 		res.status(500).send({error: "Couldn't login with account at this time"});
