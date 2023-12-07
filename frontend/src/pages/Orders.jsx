@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Orders({ userId }) {
+export default function Orders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -11,7 +11,7 @@ export default function Orders({ userId }) {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:3080/orders/history/${userId}`,
+          "http://localhost:3080/orders/history",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -33,7 +33,7 @@ export default function Orders({ userId }) {
       }
     };
     fetchOrderHistory();
-  }, [userId]);
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
