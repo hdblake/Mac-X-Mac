@@ -32,7 +32,7 @@ export default function Checkout({ cart, setCart }) {
           date: new Date(),
         },
       );
-      console.log("Order placed:", response.data.order);
+      console.log("Order placed:", response.data);
       localStorage.removeItem("cart");
       setCart([]);
       navigate("/", { state: { message: "Order successfully placed!" } });
@@ -75,12 +75,14 @@ export default function Checkout({ cart, setCart }) {
                 Order Total: ${totalPrice}
               </p>
             </div>
-            <button
-              className="font-mainText text-secondary bg-accent p-2 rounded-lg mt-4"
-              onClick={handleCheckout}
-            >
-              Checkout
-            </button>
+            <div className="flex justify-center">
+              <button
+                className="font-mainText text-secondary bg-accent p-2 rounded-lg mt-4"
+                onClick={handleCheckout}
+              >
+                Checkout
+              </button>
+            </div>
           </>
         )}
       </div>
