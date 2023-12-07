@@ -25,7 +25,7 @@ export default function Header({ loggedIn, logout }) {
         </Link>
         {loggedIn ? (
           <p className="text-accent text-2xl font-bold font-mainText">
-            Welcome {firstName}!
+            Welcome {firstName.charAt(0).toUpperCase() + firstName.slice(1)}!
           </p>
         ) : null}
       </div>
