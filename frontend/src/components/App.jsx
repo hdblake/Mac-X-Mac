@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 import Account from "../pages/Account";
 import Checkout from "../pages/Checkout";
 import Orders from "../pages/Orders";
+import ProtectedRoute from "./ProtectedRoute";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -92,12 +93,24 @@ export default function App() {
             path="/Login"
             element={<Login setLoggedIn={setLoggedIn} />}
           ></Route>
-          <Route path="/Account" element={<Account />}></Route>
+          <Route
+            path="/Account"
+            element={<ProtectedRoute element={Account} />}
+          ></Route>
           <Route
             path="/Checkout"
-            element={<Checkout cart={cart} setCart={setCart} />}
+            element={
+              <ProtectedRoute
+                element={Checkout}
+                cart={cart}
+                setCart={setCart}
+              />
+            }
           ></Route>
-          <Route path="/Account/Orders" element={<Orders />}></Route>
+          <Route
+            path="/Account/Orders"
+            element={<ProtectedRoute element={Orders} />}
+          ></Route>
         </Routes>
       </main>
       <Footer />
