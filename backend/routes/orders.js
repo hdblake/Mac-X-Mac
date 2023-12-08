@@ -8,5 +8,6 @@ router.post(
 	orderController.createOrder
 );
 router.get("/history", userController.verifyToken, orderController.getOrders);
+router.post("/process-payment", orderController.makePayment);
 
 module.exports = router;
