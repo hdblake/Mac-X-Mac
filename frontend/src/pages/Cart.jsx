@@ -31,20 +31,46 @@ export default function Cart({ cart, removeFromCart }) {
           {cart.map((product, index) => (
             <div
               key={index}
-              className="rounded-xl shadow-lg border border-2 border-accent p-4"
+              className="border border-2 border-accent rounded-xl shadow-lg mb-4 p-4 w-52"
             >
-              <p className="font-mainText text-main text-md md:text-lg">
-                Name: {product.name}
-              </p>
-              <p className="font-mainText text-main text-md md:text-lg">
-                Price: ${product.price}
-              </p>
-              <p className="font-mainText text-main text-md md:text-lg">
-                Color: {product.color}
-              </p>
-              <p className="font-mainText text-main text-md md:text-lg">
-                Quantity: {product.quantity}
-              </p>
+              {Object.keys(product).length <= 4 && (
+                <div>
+                  <p className="font-mainText text-main text-md md:text-lg">
+                    Name: {product.name}
+                  </p>
+                  <p className="font-mainText text-main text-md md:text-lg">
+                    Price: {product.price}
+                  </p>
+                  <p className="font-mainText text-main text-md md:text-lg">
+                    Color: {product.color}
+                  </p>
+                  <p className="font-mainText text-main text-md md:text-lg">
+                    Quantity: {product.quantity}
+                  </p>
+                </div>
+              )}
+              {Object.keys(product).length >= 5 && (
+                <div>
+                  <p className="font-mainText text-main text-md md:text-lg">
+                    Name: {product.name}
+                  </p>
+                  <p className="font-mainText text-main text-md md:text-lg">
+                    Size: {product.size}
+                  </p>
+                  <p className="font-mainText text-main text-md md:text-lg">
+                    Price: {product.price}
+                  </p>
+                  <p className="font-mainText text-main text-md md:text-lg">
+                    Color: {product.color}
+                  </p>
+                  <p className="font-mainText text-main text-md md:text-lg">
+                    Type: {product.type}
+                  </p>
+                  <p className="font-mainText text-main text-md md:text-lg">
+                    Text: {product.text}
+                  </p>
+                </div>
+              )}
               <div className="mt-4 flex justify-center">
                 <button
                   className="font-mainText text-secondary bg-accent p-2 rounded-lg"
