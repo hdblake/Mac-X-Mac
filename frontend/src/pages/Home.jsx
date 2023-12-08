@@ -22,7 +22,7 @@ export default function Home() {
         Welcome
       </h1>
       {message && (
-        <p className="font-mainText text-main text-md md:text-lg text-center">
+        <p className="font-mainText text-accent text-md md:text-lg text-center">
           {message}
         </p>
       )}
