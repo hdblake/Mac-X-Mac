@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { sizePricing, signTypes } from "../data/signs";
 
 export default function Signs({ addToCart }) {
+  useEffect(() => {
+    document.title = "Mac X Mac | Signs";
+  });
+
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedSizePrice, setSelectedSizePrice] = useState(0);
   const [selectedColor, setSelectColor] = useState("");
