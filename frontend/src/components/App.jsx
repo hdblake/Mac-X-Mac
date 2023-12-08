@@ -79,7 +79,10 @@ export default function App() {
             path="/Products/Macrame"
             element={<Macrame addToCart={addToCart} />}
           ></Route>
-          <Route path="/Products/Signs" element={<Signs />}></Route>
+          <Route
+            path="/Products/Signs"
+            element={<Signs addToCart={addToCart} />}
+          ></Route>
           <Route
             path="/Cart"
             element={<Cart cart={cart} removeFromCart={removeFromCart} />}
