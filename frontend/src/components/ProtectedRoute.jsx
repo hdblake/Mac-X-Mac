@@ -10,7 +10,7 @@ export default function ProtectedRoute({ element: Element, ...rest }) {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get("http://localhost:3080/user/auth", {
-          headers: { Authorization: token },
+          headers: { Authorization: `Bearer ${token}` },
         });
         console.log(response.data.message);
       } catch (error) {
