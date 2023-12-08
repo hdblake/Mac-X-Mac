@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { macrame } from "../data/macrame";
 
 export default function Macrame({ addToCart }) {
+  useEffect(() => {
+    document.title = "Mac X Mac | Macramae";
+  });
+
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
 
