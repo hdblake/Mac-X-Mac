@@ -13,7 +13,8 @@ export default function ContactForm() {
       .join("&");
   }
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencode" },
