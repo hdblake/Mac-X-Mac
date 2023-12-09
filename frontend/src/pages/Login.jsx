@@ -19,10 +19,13 @@ export default function Login({ setLoggedIn }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3080/user/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://mac-x-mac.onrender.com/user/login",
+        {
+          email,
+          password,
+        },
+      );
       const { token, firstName, userId } = response.data;
       localStorage.setItem("token", token);
       localStorage.setItem("firstName", firstName);

@@ -12,12 +12,15 @@ export default function RegisterForm() {
   const handleRegistration = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3080/user/register", {
-        firstName,
-        lastName,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://mac-x-mac.onrender.com/user/register",
+        {
+          firstName,
+          lastName,
+          email,
+          password,
+        },
+      );
       if (response.status === 201) {
         navigate("/Login");
         alert("Successful registration");

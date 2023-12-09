@@ -32,7 +32,7 @@ export default function Checkout({ cart, setCart }) {
       const userId = localStorage.getItem("userId");
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:3080/orders/checkout",
+        "https://mac-x-mac.onrender.com/orders/checkout",
         {
           userId: userId,
           items: cart,
@@ -50,11 +50,11 @@ export default function Checkout({ cart, setCart }) {
       console.log(clientSecret);
 
       const paymentResponse = await axios.post(
-        "http://localhost:3080/orders/process-payment",
+        "https://mac-x-mac.onrender.com/orders/process-payment",
         {
           paymentMethod: "pm_card_visa",
           clientSecret: clientSecret.id,
-          returnURL: "http://localhost:5173",
+          returnURL: "https://macxmac.netlify.app/",
         },
       );
 

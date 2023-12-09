@@ -9,9 +9,12 @@ export default function ProtectedRoute({ element: Element, ...rest }) {
     const verifyToken = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:3080/user/auth", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          "https://mac-x-mac.onrender.com/user/auth",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        );
         console.log(response.data.message);
       } catch (error) {
         console.log(error.message);
