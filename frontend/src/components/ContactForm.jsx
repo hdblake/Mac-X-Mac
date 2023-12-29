@@ -17,7 +17,7 @@ export default function ContactForm() {
     e.preventDefault();
     fetch("/", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencode" },
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "contact", name, email, message }),
     })
       .then(() => alert("Form successfully sent!"))
